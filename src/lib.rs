@@ -28,5 +28,5 @@ impl Table {
 }
 
 pub fn wrap_in_table(s: String) -> String {
-    format!("<table>{s}</table>")
+    format!("<table>{}</table>", s)
 }
