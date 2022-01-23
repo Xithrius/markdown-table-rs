@@ -1,5 +1,5 @@
 [package]
-name = "rust-library-project-template"
+name = "markdown-table"
 version = "0.1.0"
 edition = "2018"
 
