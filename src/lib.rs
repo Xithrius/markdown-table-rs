@@ -9,8 +9,7 @@ impl Table {
     }
 
     pub fn as_markdown(&self) -> String {
-        format!(
-            "<table>{}</table>",
+        wrap_in_table(
             self.boxes
                 .iter()
                 .map(|v| {
@@ -23,7 +22,11 @@ impl Table {
                     )
                 })
                 .collect::<Vec<String>>()
-                .join("")
+                .join(""),
         )
     }
+}
+
+pub fn wrap_in_table(s: String) -> String {
+    format!("<table>{s}</table>")
 }
