@@ -1,2 +1,2 @@
-# rust-library-project-template
-A template for Rust library projects.
+# markdown-table-rs
+Creating markdown tables with Rust!
