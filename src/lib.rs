@@ -1,16 +1,20 @@
+pub mod utils;
+
+use crate::utils::markdown::wrap_in_table;
+
 #[derive(Debug)]
 pub struct Table {
-    boxes: Vec<Vec<String>>,
+    cells: Vec<Vec<String>>,
 }
 
 impl Table {
-    pub fn new(boxes: Vec<Vec<String>>) -> Self {
-        Table { boxes }
+    pub fn new(cells: Vec<Vec<String>>) -> Self {
+        Table { cells }
     }
 
     pub fn as_markdown(&self) -> String {
         wrap_in_table(
-            self.boxes
+            self.cells
                 .iter()
                 .map(|v| {
                     format!(
@@ -25,8 +29,40 @@ impl Table {
                 .join(""),
         )
     }
-}
 
-pub fn wrap_in_table(s: String) -> String {
-    format!("<table>{}</table>", s)
+    pub fn append_column(&mut self) {
+        todo!()
+    }
+
+    pub fn prepend_column() {
+        todo!()
+    }
+
+    pub fn insert_column() {
+        todo!()
+    }
+
+    pub fn pop_column() {
+        todo!()
+    }
+
+    pub fn append_row() {
+        todo!()
+    }
+
+    pub fn prepend_row() {
+        todo!()
+    }
+
+    pub fn insert_row() {
+        todo!()
+    }
+
+    pub fn pop_row() {
+        todo!()
+    }
+
+    pub fn remove_cell() {
+        todo!()
+    }
 }

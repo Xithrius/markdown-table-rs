@@ -1,6 +1,6 @@
 #[cfg(test)]
 mod tests {
-    use markdown_table::*;
+    use markdown_table::{utils::markdown::wrap_in_table, Table};
 
     fn setup() -> Table {
         Table::new(vec![
