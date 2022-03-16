@@ -1,68 +1,41 @@
-pub mod utils;
+use anyhow::{bail, Result};
 
-use crate::utils::markdown::wrap_in_table;
-
-#[derive(Debug)]
-pub struct Table {
+#[derive(Debug, Clone)]
+pub struct MarkdownTable {
     cells: Vec<Vec<String>>,
 }
 
-impl Table {
+impl MarkdownTable {
     pub fn new(cells: Vec<Vec<String>>) -> Self {
-        Table { cells }
+        MarkdownTable { cells }
     }
 
-    pub fn as_markdown(&self) -> String {
-        wrap_in_table(
-            self.cells
-                .iter()
-                .map(|v| {
-                    format!(
-                        "<tr>{}",
-                        v.iter()
-                            .map(|v_inner| format!("<td>{}", v_inner))
-                            .collect::<Vec<String>>()
-                            .join("")
-                    )
-                })
-                .collect::<Vec<String>>()
-                .join(""),
-        )
+    pub fn as_markdown(&self) -> Result<String> {
+        if !self.cells.is_empty() {
+            Ok(format!(
+                "<table>{}</table>",
+                self.cells
+                    .iter()
+                    .map(|v| {
+                        format!(
+                            "<tr>{}",
+                            v.iter()
+                                .map(|v_inner| format!("<td>{}", v_inner))
+                                .collect::<Vec<String>>()
+                                .join("")
+                        )
+                    })
+                    .collect::<Vec<String>>()
+                    .join(""),
+            ))
+        } else {
+            bail!("Table must have at least 1 row.".to_string())
+        }
     }
+}
 
-    pub fn append_column(&mut self) {
-        todo!()
-    }
-
-    pub fn prepend_column() {
-        todo!()
-    }
-
-    pub fn insert_column() {
-        todo!()
-    }
-
-    pub fn pop_column() {
-        todo!()
-    }
-
-    pub fn append_row() {
-        todo!()
-    }
-
-    pub fn prepend_row() {
-        todo!()
-    }
-
-    pub fn insert_row() {
-        todo!()
-    }
-
-    pub fn pop_row() {
-        todo!()
-    }
-
-    pub fn remove_cell() {
-        todo!()
+impl ToString for MarkdownTable {
+    fn to_string(&self) -> String {
+        self.as_markdown().unwrap()
     }
 }
