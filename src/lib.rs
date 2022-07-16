@@ -1,13 +1,21 @@
+use std::fmt::Display;
+
 use anyhow::{bail, Result};
 
 #[derive(Debug, Clone)]
-pub struct MarkdownTable {
-    cells: Vec<Vec<String>>,
+pub struct MarkdownTable<T>
+where
+    T: ToString + Display,
+{
+    cells: Vec<Vec<T>>,
 }
 
-impl MarkdownTable {
-    pub fn new(cells: Vec<Vec<String>>) -> Self {
-        MarkdownTable { cells }
+impl<T> MarkdownTable<T>
+where
+    T: ToString + Display,
+{
+    pub fn new(cells: Vec<Vec<T>>) -> Self {
+        Self { cells }
     }
 
     pub fn as_markdown(&self) -> Result<String> {
@@ -34,7 +42,10 @@ impl MarkdownTable {
     }
 }
 
-impl ToString for MarkdownTable {
+impl<T> ToString for MarkdownTable<T>
+where
+    T: ToString + Display,
+{
     fn to_string(&self) -> String {
         self.as_markdown().unwrap()
     }
