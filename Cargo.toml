@@ -13,3 +13,4 @@ categories = ["utilities"]
 
 [dependencies]
 anyhow = "1.0.56"
+pad = "0.1.6"
