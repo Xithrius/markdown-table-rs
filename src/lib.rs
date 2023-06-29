@@ -69,7 +69,7 @@ where
         match &self.headings {
             Some(headings) => {
                 let mut col_width: Vec<usize> = headings
-                    .into_iter()
+                    .iter()
                     .map(|h| cmp::max(5, h.label.len()))
                     .collect();
 
@@ -85,7 +85,7 @@ where
                 let header_row = format!(
                     "|{}|",
                     headings
-                        .into_iter()
+                        .iter()
                         .enumerate()
                         .map(|(i, h)| format!(" {} ", h.label).pad_to_width(col_width[i]))
                         .collect::<Vec<String>>()
@@ -94,7 +94,7 @@ where
                 let header_split_row = format!(
                     "|{}|",
                     headings
-                        .into_iter()
+                        .iter()
                         .enumerate()
                         .map(|(i, h)| format!(
                             " {} ",
