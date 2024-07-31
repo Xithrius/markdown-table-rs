@@ -70,13 +70,13 @@ where
             Some(headings) => {
                 let mut col_width: Vec<usize> = headings
                     .iter()
-                    .map(|h| cmp::max(5, h.label.len()))
+                    .map(|h| cmp::max(5, h.label.len() + 2))
                     .collect();
 
                 for row in &self.cells {
                     for (col_index, value) in row.iter().enumerate() {
                         // TODO using tostring,  may be not good as mutliline string will break it
-                        let value_len = value.to_string().len();
+                        let value_len = value.to_string().len() + 2;
                         if value_len > col_width[col_index] {
                             col_width[col_index] = value_len;
                         }

@@ -86,8 +86,38 @@ mod tests {
             .unwrap();
 
         let expected: &str = r#"| Default Header | Left Align | Right Align | Center Align |
-| ------------ | :------- | --------: | :--------: |
-| Val 1        | Val 2    | Val 3     | Val 4      |
+| -------------- | :--------- | ----------: | :----------: |
+| Val 1          | Val 2      | Val 3       | Val 4        |
+"#;
+
+        assert_eq!(md, expected.to_string());
+    }
+
+
+    #[test]
+    fn test_table_with_long_values() {
+        let md: String = MarkdownTable::new(vec![vec!["value bigger than header 1", "value bigger than header 2", "value bigger than header 3", "value bigger than header 4"]])
+            .with_headings(vec![
+                Heading::new("Default Header".to_string(), None),
+                Heading::new(
+                    "Left Align".to_string(),
+                    Some(markdown_table::HeadingAlignment::Left),
+                ),
+                Heading::new(
+                    "Right Align".to_string(),
+                    Some(markdown_table::HeadingAlignment::Right),
+                ),
+                Heading::new(
+                    "Center Align".to_string(),
+                    Some(markdown_table::HeadingAlignment::Center),
+                ),
+            ])
+            .as_markdown()
+            .unwrap();
+
+        let expected: &str = r#"| Default Header             | Left Align                 | Right Align                | Center Align               |
+| -------------------------- | :------------------------- | -------------------------: | :------------------------: |
+| value bigger than header 1 | value bigger than header 2 | value bigger than header 3 | value bigger than header 4 |
 "#;
 
         assert_eq!(md, expected.to_string());
